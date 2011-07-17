@@ -12,8 +12,8 @@ module SalorApi
   #    args
   #  end
   def self.add(action,name,&block)
-    @@_callbacks[action] ||= []
-    @@_callbacks[action] << [name,block]
+    self.callbacks[action] ||= []
+    self.callbacks[action] << [name,block]
   end
   def self.run(action,args)
     self.callbacks[action].each {|cb| args = cb[1].call(args) } if self.callbacks[action]
@@ -73,5 +73,8 @@ module SalorApi
         return send(orig_name,args)
       end
     end
+  end
+  class Helper
+    
   end
 end
